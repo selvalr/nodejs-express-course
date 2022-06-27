@@ -7,6 +7,10 @@
     5. JWT Basics
     6. Jobs API
 
+
+
+
+
 * Course Exclusive
     7. File Upload(local and cloudinary)
     8. Send Email(nodemailer,ethereal and sendgrid)
@@ -16,3 +20,9 @@
     12. Sessions
     
 
+
+
+
+    git remote add origin git@github.com:selvalr/nodejs-express-course.git
+git branch -M main
+git push -u origin main
