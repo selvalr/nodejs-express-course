@@ -1,28 +1,22 @@
 const express = require('express')
-const app = express()
-const morgan = require('morgan')
-const logger = require('./logger')
-const authorize = require('./authorize')
-//  req => middleware => res
+const router = express.Router()
 
-// app.use([logger, authorize])
-// app.use(express.static('./public'))
-app.use(morgan('tiny'))
+const {
+  getPeople,
+  createPerson,
+  createPersonPostman,
+  updatePerson,
+  deletePerson,
+} = require('../controllers/people')
 
-app.get('/', (req, res) => {
-  res.send('Home')
-})
-app.get('/about', (req, res) => {
-  res.send('About')
-})
-app.get('/api/products', (req, res) => {
-  res.send('Products')
-})
-app.get('/api/items', (req, res) => {
-  console.log(req.user)
-  res.send('Items')
-})
+// router.get('/', getPeople)
+// router.post('/', createPerson)
+// router.post('/postman', createPersonPostman)
+// router.put('/:id', updatePerson)
+// router.delete('/:id', deletePerson)
 
-app.listen(5000, () => {
-  console.log('Server is listening on port 5000....')
-})
+router.route('/').get(getPeople).post(createPerson)
+router.route('/postman').post(createPersonPostman)
+router.route('/:id').put(updatePerson).delete(deletePerson)
+
+module.exports = router
