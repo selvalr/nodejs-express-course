@@ -4,12 +4,16 @@ const task=require('./routes/router');
 const connectDB = require('./db/connect');
 const path=require('path')
 
+
 const mongoose = require('mongoose')
 dotenv.config({ path: '.env' })
+const notFound=require('./middleware/not-found')
+const errorHandlerMiddleware=require('./middleware/error-handler')
+
 
 const app=express();
 connectDB();
-const port=3000;
+const port=process.env.PORT ||  3000;
 
 //middleware
 app.use(express.static('./public'))
@@ -22,6 +26,9 @@ app.get('/home',(req,res)=>{
 */
 
 app.use('/api/v1/tasks',task)
+
+app.use(notFound);
+app.use(errorHandlerMiddleware)
 
 
 //app.get('/api/v1/tasks') -get all the task
